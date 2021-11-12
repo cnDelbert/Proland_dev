@@ -47,8 +47,12 @@
 #include <assert.h>
 #include <fcntl.h>
 
+#if _WIN32 || WIN32
+#include <io.h>
+#else
 // Lars F: addition, since they use close() below
 #include <unistd.h>
+#endif // _WIN32
 
 #include "ork/core/Object.h"
 
@@ -168,8 +172,11 @@ void GetMinMaxColorsDXT1( const byte *colorBlock, byte *minColor, byte *maxColor
 	maxColor[2] = ( maxColor[2] >= inset[2] ) ? maxColor[2] - inset[2] : 0;
 }
 
-//#define ALIGN16( x ) __declspec(align(16)) x
+#if _WIN32 || WIN32
+#define ALIGN16( x ) __declspec(align(16)) x
+#else
 #define ALIGN16( x ) x __attribute__ ((aligned (16)))
+#endif // _WIN32
 
 #define R_SHUFFLE_D( x, y, z, w ) (( (w) & 3 ) << 6 | ( (z) & 3 ) << 4 | ( (y) & 3 ) << 2 | ( (x) & 3 ))
 
