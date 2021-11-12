@@ -47,7 +47,7 @@
 #include "ork/render/FrameBuffer.h"
 #include "ork/resource/XMLResourceLoader.h"
 #include "ork/scenegraph/SceneManager.h"
-#include "ork/ui/GlutWindow.h"
+#include "ork/ui/GlfwWindow.h"
 
 #include "proland/ui/BasicViewHandler.h"
 #include "proland/terrain/ReadbackManager.h"
@@ -268,7 +268,7 @@ public:
     }
 };
 
-class PreprocessTreeTables : public GlutWindow
+class PreprocessTreeTables : public GlfwWindow
 {
 public:
     ptr<SceneManager> manager;
@@ -289,7 +289,7 @@ public:
     const char* output;
 
     PreprocessTreeTables(float minRadius, float maxRadius, float treeHeight, float treeTau, int nViews, loadTreeViewsFunction tree, const char* output) :
-        GlutWindow(Window::Parameters().size(WIDTH, HEIGHT).depth(true)), treeHeight(treeHeight), output(output)
+        GlfwWindow(Window::Parameters().size(WIDTH, HEIGHT).depth(true)), treeHeight(treeHeight), output(output)
     {
         FileLogger::File *out = new FileLogger::File("log.html");
         Logger::INFO_LOGGER = new FileLogger("INFO", out, Logger::INFO_LOGGER);
@@ -406,7 +406,7 @@ public:
         FrameBuffer::getDefault()->clear(true, false, true);
         manager->update(t, dt);
         manager->draw();
-        GlutWindow::redisplay(t, dt);
+        GlfwWindow::redisplay(t, dt);
 
         if (pass == 0) {
             readback->readback(FrameBuffer::getDefault(), 0, 0, WIDTH, HEIGHT, RGBA, UNSIGNED_BYTE,
@@ -463,7 +463,7 @@ public:
         fb->setViewport(vec4<GLint>(0, 0, x, y));
         fb->setMultisample(true);
         fb->setSampleAlpha(true, true);
-        GlutWindow::reshape(x, y);
+        GlfwWindow::reshape(x, y);
     }
 
     virtual bool keyTyped(unsigned char c, modifier m, int x, int y)

@@ -44,7 +44,7 @@
 #include "tiffio.h"
 
 #include "ork/render/FrameBuffer.h"
-#include "ork/ui/GlutWindow.h"
+#include "ork/ui/GlfwWindow.h"
 
 namespace proland
 {
@@ -92,7 +92,7 @@ TreeMesh::TreeMesh(ptr< Mesh<Vertex, unsigned int> > mesh, ptr<Texture2D> textur
 {
 }
 
-class PreprocessTree : public GlutWindow
+class PreprocessTree : public GlfwWindow
 {
 public:
     vector<TreeMesh> tree;
@@ -103,7 +103,7 @@ public:
     ptr<Program> p;
 
     PreprocessTree(loadTreeMeshFunction loadTree, int n, int w, const char* output) :
-        GlutWindow(Window::Parameters().size(w, w).depth(true).alpha(true)),
+        GlfwWindow(Window::Parameters().size(w, w).depth(true).alpha(true)),
         n(n), w(w), output(output)
     {
         loadTree(tree);
