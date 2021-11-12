@@ -48,7 +48,7 @@ namespace proland
 /**
  * Initializes the river plugin.
  */
-PROLAND_API void initRiverPlugin();
+void PROLAND_API initRiverPlugin();
 
 }
 

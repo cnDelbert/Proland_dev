@@ -48,7 +48,7 @@ namespace proland
 /**
  * Initializes the terrain plugin.
  */
-PROLAND_API void initTerrainPlugin();
+void PROLAND_API initTerrainPlugin();
 
 }
 

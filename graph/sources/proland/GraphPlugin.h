@@ -48,7 +48,7 @@ namespace proland
 /**
  * Initializes the graph plugin.
  */
-PROLAND_API void initGraphPlugin();
+void PROLAND_API initGraphPlugin();
 
 }
 

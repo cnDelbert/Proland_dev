@@ -421,7 +421,7 @@ public:
 
 static_ptr<Window> PreprocessTree::app;
 
-PROLAND_API void preprocessTree(loadTreeMeshFunction loadTree, int n, int w, const char *output)
+void PROLAND_API preprocessTree(loadTreeMeshFunction loadTree, int n, int w, const char *output)
 {
     PreprocessTree::app = new PreprocessTree(loadTree, n, w, output);
     PreprocessTree::app->start();

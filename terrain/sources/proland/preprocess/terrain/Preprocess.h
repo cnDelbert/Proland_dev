@@ -69,7 +69,7 @@ namespace proland
  * @ingroup preprocess
  * @author Eric Bruneton
  */
-PROLAND_API class InputMap
+class PROLAND_API InputMap
 {
 public:
     /**
@@ -194,7 +194,7 @@ private:
  *     overflows during the precomputations (i.e. if the maximum residual, indicated
  *     in the standard ouput is larger than 65535), retry with a larger value.
  */
-PROLAND_API void preprocessDem(InputMap *src, int dstMinTileSize, int dstTileSize, int dstMaxLevel,
+void PROLAND_API preprocessDem(InputMap *src, int dstMinTileSize, int dstTileSize, int dstMaxLevel,
         const string &dstFolder, const string &tmpFolder, float residualScale);
 
 /**
@@ -207,7 +207,7 @@ PROLAND_API void preprocessDem(InputMap *src, int dstMinTileSize, int dstTileSiz
  *     longitudes, and the y coordinate to latitudes (i.e. using the
  *     equirectangular projection, aka the equidirectional projection,
  *     equidistant cylindrical projection, geographic projection, or plate
- *     carrée projection). Only the x channel is used.
+ *     carrï¿½e projection). Only the x channel is used.
  * @param dstMinTileSize the size of the root tile (without borders). E.g., a size
  *     of 24 corresponds to a full size of 24+5=29.
  * @param dstTileSize the maximum size of the tiles (without borders). E.g., a size
@@ -226,7 +226,7 @@ PROLAND_API void preprocessDem(InputMap *src, int dstMinTileSize, int dstTileSiz
  *     overflows during the precomputations (i.e. if the maximum residual, indicated
  *     in the standard ouput is larger than 65535), retry with a larger value.
  */
-PROLAND_API void preprocessSphericalDem(InputMap *src, int dstMinTileSize, int dstTileSize, int dstMaxLevel,
+void PROLAND_API preprocessSphericalDem(InputMap *src, int dstMinTileSize, int dstTileSize, int dstMaxLevel,
         const string &dstFolder, const string &tmpFolder, float residualScale);
 
 /**
@@ -243,7 +243,7 @@ PROLAND_API void preprocessSphericalDem(InputMap *src, int dstMinTileSize, int d
  *     longitudes, and the y coordinate to latitudes (i.e. using the
  *     equirectangular projection, aka the equidirectional projection,
  *     equidistant cylindrical projection, geographic projection, or plate
- *     carrée projection). Only the x channel is used.
+ *     carrï¿½e projection). Only the x channel is used.
  * @param srcFolder where the preprocessed elevation map files are stored (these
  *     files are supposed to have been generated with #preprocessSphericalDem).
  * @param minLevel the minimum quadtree level used to sample visibility around
@@ -258,7 +258,7 @@ PROLAND_API void preprocessSphericalDem(InputMap *src, int dstMinTileSize, int d
  * @param dstFolder where the precomputed file must be saved.
  * @param tmpFolder where temporary files must be saved.
  */
-PROLAND_API void preprocessSphericalAperture(const string &srcFolder, int minLevel, int maxLevel, int samples,
+void PROLAND_API preprocessSphericalAperture(const string &srcFolder, int minLevel, int maxLevel, int samples,
         const string &dstFolder, const string &tmpFolder);
 
 /**
@@ -282,7 +282,7 @@ PROLAND_API void preprocessSphericalAperture(const string &srcFolder, int minLev
  * @param linearToRgb an optional transformation, which must be the inverse of
  *     'rgbToLinear'. A NULL value indicates the identity function.
  */
-PROLAND_API void preprocessOrtho(InputMap *src, int dstTileSize, int dstChannels, int dstMaxLevel,
+void PROLAND_API preprocessOrtho(InputMap *src, int dstTileSize, int dstChannels, int dstMaxLevel,
         const string &dstFolder, const string &tmpFolder, float (*rgbToLinear)(float) = NULL, float (*linearToRgb)(float) = NULL);
 
 /**
@@ -307,7 +307,7 @@ PROLAND_API void preprocessOrtho(InputMap *src, int dstTileSize, int dstChannels
  * @param linearToRgb an optional transformation, which must be the inverse of
  *     'rgbToLinear'. A NULL value indicates the identity function.
  */
-PROLAND_API void preprocessSphericalOrtho(InputMap *src, int dstTileSize, int dstChannels, int dstMaxLevel,
+void PROLAND_API preprocessSphericalOrtho(InputMap *src, int dstTileSize, int dstChannels, int dstMaxLevel,
         const string &dstFolder, const string &tmpFolder, float (*rgbToLinear)(float) = NULL, float (*linearToRgb)(float) = NULL);
 
 }

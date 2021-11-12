@@ -48,7 +48,7 @@ namespace proland
 /**
  * Initializes the forest plugin.
  */
-PROLAND_API void initForestPlugin();
+void PROLAND_API initForestPlugin();
 
 }
 

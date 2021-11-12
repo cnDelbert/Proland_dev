@@ -60,7 +60,7 @@ namespace proland
  * @ingroup preprocess
  * @author Eric Bruneton
  */
-PROLAND_API class TreeMesh
+class PROLAND_API TreeMesh
 {
 public:
     struct Vertex
@@ -94,22 +94,22 @@ typedef ptr<Texture2DArray> (*loadTreeViewsFunction)();
  *      must be -1:1 x -1:1 x -1:1).
  * @param output the folder where to write the generated textures.
  */
-PROLAND_API void preprocessTree(loadTreeMeshFunction loadTree, int n, int w, const char *output);
+void PROLAND_API preprocessTree(loadTreeMeshFunction loadTree, int n, int w, const char *output);
 
 /**
  * TODO.
  */
-PROLAND_API void preprocessTreeTables(float minRadius, float maxRadius, float treeHeight, float treeTau, int nViews, loadTreeViewsFunction loadTree, const char *output);
+void PROLAND_API preprocessTreeTables(float minRadius, float maxRadius, float treeHeight, float treeTau, int nViews, loadTreeViewsFunction loadTree, const char *output);
 
 /**
  * TODO.
  */
-PROLAND_API void mergeTreeTables(const char* input1, const char* input2, const char *output);
+void PROLAND_API mergeTreeTables(const char* input1, const char* input2, const char *output);
 
 /**
  * TODO.
  */
-PROLAND_API void preprocessMultisample(const char *output);
+void PROLAND_API preprocessMultisample(const char *output);
 
 }
 

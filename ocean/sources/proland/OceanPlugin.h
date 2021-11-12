@@ -48,7 +48,7 @@ namespace proland
 /**
  * Initializes the ocean plugin.
  */
-PROLAND_API void initOceanPlugin();
+void PROLAND_API initOceanPlugin();
 
 }
 

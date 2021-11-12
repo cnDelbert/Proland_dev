@@ -55,7 +55,7 @@ namespace proland
  * @ingroup preprocess
  * @author Eric Bruneton
  */
-PROLAND_API class AtmoParameters
+class PROLAND_API AtmoParameters
 {
 public:
     float Rg;
@@ -86,7 +86,7 @@ public:
  * @param params the atmosphere parameters.
  * @param output the folder where to write the generated tables.
  */
-PROLAND_API void preprocessAtmo(const AtmoParameters &params, const char *output);
+void PROLAND_API preprocessAtmo(const AtmoParameters &params, const char *output);
 
 }
 
