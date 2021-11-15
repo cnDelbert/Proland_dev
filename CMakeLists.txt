@@ -25,18 +25,41 @@ find_package(PkgConfig)
 PKG_CHECK_MODULES(ORK REQUIRED ork)
 include_directories(${ORK_INCLUDE_DIRS})
 link_directories(${ORK_LIBRARY_DIRS})
-add_definitions(${ORK_CFLAGS})
+#add_definitions(${ORK_CFLAGS})
 message( STATUS "Found ork? " ${ORK_FOUND})
 message(STATUS "ork include_directories: " ${ORK_INCLUDE_DIRS})
 message(STATUS "ork link_directories:    " ${ORK_LIBRARY_DIRS})
 message(STATUS "ork add_definitions:     " ${ORK_CFLAGS})
 
-#find_package(GLUT)
+PKG_CHECK_MODULES(TIFF libtiff-4 REQUIRED)
+include_directories(${TIFF_INCLUDE_DIRS})
+link_directories(${TIFF_LIBRARY_DIRS})
+
+PKG_CHECK_MODULES(Glew glew REQUIRED)
+include_directories(${Glew_INCLUDE_DIRS})
+link_directories(${Glew_LIBRARY_DIRS})
+
+PKG_CHECK_MODULES(GLFW glfw3 REQUIRED)
+include_directories(${GLFW_INCLUDE_DIRS})
+link_directories(${GLFW_LIBRARY_DIRS})
+
+PKG_CHECK_MODULES(GLUT freeglut REQUIRED)
+include_directories(${GLUT_INCLUDE_DIRS})
+link_directories(${GLUT_LIBRARY_DIRS})
+
+SET(pThreads_INCLUDE_DIRS pThreads_INCLUDE_DIR-NOTFOUND CACHE PATH "pThreads include dir.")
+SET(pThreads_LIBRARY_DIRS pThreads_LIB-NOTFOUND CACHE PATH "pThreads lib dir.")
+
+SET(AntTweakBar_INCLUDE_DIRS AntTweakBar_INCLUDE_DIR-NOTFOUND CACHE PATH "AntTweakBar include dir.")
+SET(AntTweakBar_LIBRARY_DIRS AntTweakBar_LIB-NOTFOUND CACHE PATH "AntTweakBar lib dir.")
+
+include_directories(${pThreads_INCLUDE_DIRS} ${AntTweakBar_INCLUDE_DIRS})
+link_directories(${pThreads_LIBRARY_DIRS} ${AntTweakBar_LIBRARY_DIRS})
 
 set(LIB_INSTALL_DIR "lib" CACHE STRING "Library directory name (lib/lib32/lib64)" )
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
-add_definitions("-DPROLAND_API=" "-fPIC")
+# add_definitions("-DPROLAND_API=" "-fPIC")
 
 option(BUILD_SHARED      "Build shared library instead of static"   OFF)
 option(BUILD_EXAMPLES    "Build examples"                           ON )
@@ -57,7 +80,7 @@ add_subdirectory(graph)
 add_subdirectory(edit)
 
 if(BUILD_EXAMPLES)
-	add_subdirectory(core/examples)
+    add_subdirectory(core/examples)
     add_subdirectory(terrain/examples)
     add_subdirectory(atmo/examples)
     add_subdirectory(ocean/examples)

@@ -74,7 +74,7 @@ public:
      * Creates Graph objects. GraphFactory is used to determine what kind
      * of graph will be created in a GraphProducer.
      */
-    class GraphFactory : public Object
+    class PROLAND_API GraphFactory : public Object
     {
     public:
         GraphFactory();

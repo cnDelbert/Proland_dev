@@ -13,7 +13,9 @@ file(GLOB SOURCE_FILES *.cpp */*.cpp graph/producer/*.cpp)
 # Libraries
 set(LIBS "")
 if(UNIX)
-	set(LIBS ${LIBS} rt)
+    set(LIBS ${LIBS} rt)
+else(UNIX)
+    set(LIBS ${LIBS} proland-core proland-terrain ork GLU32)
 endif(UNIX)
 
 # Static or shared?
@@ -44,6 +46,7 @@ INSTALL(TARGETS ${LIBNAME} LIBRARY DESTINATION ${LIB_INSTALL_DIR} ARCHIVE DESTIN
 
 #SET(ORK_CFLAGS "-DORK_API= -DTIXML_USE_STL")
 #SET(PROLAND_CFLAGS "-DPROLAND_API=" "-DUSE_SHARED_PTR")
+add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllexport)" "-DUSE_SHARED_PTR")
 
 CONFIGURE_FILE(proland-graph.pc.in ${PROJECT_BINARY_DIR}/proland-graph.pc @ONLY)
 INSTALL(FILES ${PROJECT_BINARY_DIR}/proland-graph.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)

@@ -13,6 +13,8 @@ file(GLOB SOURCE_FILES *.cpp */*.cpp ui/twbar/*.cpp particles/screen/*.cpp parti
 set(LIBS "")
 if(UNIX)
 	set(LIBS ${LIBS} rt)
+else(UNIX)
+  set(LIBS ${LIBS} ork pthreadVC2)
 endif(UNIX)
 
 # Static or shared?
@@ -41,8 +43,9 @@ ENDFOREACH(subdir)
 # Install library
 INSTALL(TARGETS ${LIBNAME} LIBRARY DESTINATION ${LIB_INSTALL_DIR} ARCHIVE DESTINATION ${LIB_INSTALL_DIR})
 
-SET(ORK_CFLAGS "-DORK_API= -DTIXML_USE_STL")
-SET(PROLAND_CFLAGS "-DPROLAND_API= -DUSE_SHARED_PTR")
+# SET(ORK_CFLAGS "-DORK_API= -DTIXML_USE_STL")
+# SET(PROLAND_CFLAGS "-DPROLAND_API= -DUSE_SHARED_PTR")
+add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllexport)" "-DUSE_SHARED_PTR")
 
 CONFIGURE_FILE(proland-core.pc.in ${PROJECT_BINARY_DIR}/proland-core.pc @ONLY)
 INSTALL(FILES ${PROJECT_BINARY_DIR}/proland-core.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)

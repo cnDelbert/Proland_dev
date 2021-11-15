@@ -15,7 +15,7 @@ include_directories(${PROLAND_CORE_SOURCES})
 # Sources
 file(GLOB SOURCE_FILES *.cpp)
 
-add_definitions("-DORK_API=")
+add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllimport)" "-DUSE_SHARED_PTR")
 
 # Assign output directory for this example
 set(EXAMPLE_EXE_PATH "/examples/core/helloworld")
@@ -23,7 +23,12 @@ set(EXECUTABLE_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}${EXAMPLE_EXE_PATH}")
 message(STATUS "Setting example output dir: " ${EXECUTABLE_OUTPUT_PATH})
 
 add_executable(${EXENAME} ${SOURCE_FILES})
-target_link_libraries(${EXENAME} -Wl,--whole-archive proland-core ork -Wl,--no-whole-archive pthread GL GLU GLEW glut glfw3 rt dl Xrandr Xinerama Xxf86vm Xext Xcursor Xrender Xfixes AntTweakBar stb_image tinyxml X11)
+
+IF(WIN32)
+    target_link_libraries(${EXENAME} proland-core ork pthreadVC2 OpenGL32 GLU32 glew32 freeglut glfw3 AntTweakBar64 stb_image tinyxml)
+ELSE(WIN32)
+    target_link_libraries(${EXENAME} -Wl,--whole-archive proland-core ork -Wl,--no-whole-archive pthread GL GLU GLEW glut glfw3 rt dl Xrandr Xinerama Xxf86vm Xext Xcursor Xrender Xfixes AntTweakBar stb_image tinyxml X11)
+ENDIF(WIN32)
 
 # Copy all files in source tree, except this CMakeLists.txt
 add_custom_command(TARGET ${EXENAME} POST_BUILD
