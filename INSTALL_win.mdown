@@ -1,0 +1,154 @@
+#  Windows下编译Proland
+
+## 工具准备
+
+工具准备需要：
+
+- Git。
+- CMake。
+- PKG Config。
+
+详细请参见Ork的工具准备：[Gitee](https://gitee.com/e-mail/ork/blob/master/INSTALL_win.mdown) | [Github](https://github.com/cnDelbert/ork/blob/master/INSTALL_win.mdown) | [SourceForge](http://ork.code.delbert.me)。
+
+## 代码准备
+
+- AntTweakBar。
+- pThreads。
+- zlib（编译TIFF需要，Proland工程**必选**，否则运行时会有Warning）。
+- JPEG（编译TIFF需要，Proland工程**必选**，否则运行时会有Warning）。
+- DEFLATE（压缩算法库，编译TIFF需要，可选）。
+- TIFF。
+
+### AntTweakBar
+
+AntTweakBar是一个基于C/C++的用于构建用户界面的库，[官网](http://anttweakbar.sourceforge.net/doc/)最新版本为1.1.6，已经明确表示不再进行维护。
+
+可以直接从[官网](http://anttweakbar.sourceforge.net/doc/tools:anttweakbar:download)下载已经编译好的二进制文件[AntTweakBar_116.zip](https://sourceforge.net/projects/anttweakbar/files/latest/download?source=dlp)，但在集成到Proland中会有`texture2D`导致FS编译失败的问题。
+
+可以从GitHub下载我已经修改过的AntTweakBar版本：[AntTweakBar](https://github.com/cnDelbert/AntTweakBar)。[FixComment](https://github.com/cnDelbert/AntTweakBar/commit/44f68d4833bead9aa1ce7ae4cdb1f89a6b8f81c3)
+
+#### Prebuild
+
+链接中只提供了经过修改的x64版本的文件。
+
+使用CMake编译时，需要手动指定AntTweakBar的include和lib路径。
+
+AntTweakBar_1.1.6_x64.zip: http://ork.code.delbert.me/prebuild/AntTweakBar_1.1.6_x64.zip
+
+### pThreads
+
+参见ork仓库的介绍：
+
+[Github](https://github.com/cnDelbert/ork/blob/master/INSTALL_win.mdown#pthreads) | [Gitee](https://gitee.com/e-mail/ork/blob/master/INSTALL_win.mdown#pthreads) | [SourceForge](http://http://ork.code.delbert.me/)
+
+### zlib
+
+zlib官网http://zlib.net/ ，最新版本1.2.11，可以下载 tar.gz，tar.xz，zip格式的代码压缩包。
+
+下载代码后直接使用CMake编译生成VS工程。
+
+#### Prebuild
+
+下载解压后，需要修改`.pc`文件中prefix到对应路径，并将`zlib.pc`所在路径添加到`PKG_CONFIG_PATH`变量中：
+
+zlib_1.2.11_x64.zip: http://ork.code.delbert.me/prebuild/zlib_1.2.11_x64.zip
+
+>  由于TIFF在查找zlib时使用的是`Find_Package`命令而不是pkg-config，因此需要将包含`zlib.h`的路径（include路径）和`zlib.lib`的路径（lib）添加到系统环境变量PATH中。
+
+### JPEG
+
+JPEG标准很混乱，本次编译使用的JPEG源码是从*独立JPEG工作组* http://www.ijg.org/ 获取的：http://www.ijg.org/files/jpegsr9d.zip 。
+
+JPEG在Windows下使用`nmake`编译，详细步骤请参考解压后的`install.txt`文件。
+
+以VS2019为例：
+
+- 如果需要32位，则启动*Developer Command Prompt for VS 2019*
+- 如果需要64位，则启动*x64 Native Tools Command Prompt for VS 2019*
+
+命令行启动后，切换到下载的jpeg代码路径，执行：
+
+```bash
+NMAKE /f makefile.vs setupcopy-v16
+```
+
+生成VS解决方案jpeg.sln后，直接编译即可。
+
+#### Prebuild
+
+jpeg-9d_x64.zip： http://ork.code.delbert.me/prebuild/jpeg-9d_x64.zip
+
+> 由于TIFF在查找jpeg时使用的是`Find_Package`命令而不是pkg-config，因此需要将包含`jpeg.h`的路径（源码路径）和`jpeg.lib`的路径（lib）添加到系统环境变量PATH中。
+
+### DEFLATE
+
+libDeflate没有找到官网，Google第一个是 <https://github.com/ebiggers/libdeflate>。
+
+libDeflate在Windows下使用`nmake`编译。
+
+以VS 2019为例：
+
+- 如果需要32位，则启动*Developer Command Prompt for VS 2019*
+- 如果需要64位，则启动*x64 Native Tools Command Prompt for VS 2019*
+
+命令行启动后，切换到下载的libdeflate代码路径，执行：
+
+```bash
+nmake /f Makefile.msc
+```
+
+生成VS解决方案后，直接编译即可。
+
+#### Prebuild
+
+可以从github release页面下载对应的bin：https://github.com/ebiggers/libdeflate/releases
+
+需要将下载的libdeflate路径（包含`libdeflate.h`文件的路径）和lib路径（包含`libdeflate.lib`的路径）添加到系统PATH变量。
+
+### ISO-JBIG
+
+按照Wikipedia的说明：[JBIG](https://en.wikipedia.org/wiki/JBIG)->[Joint Bi-level Image Experts Group](https://en.wikipedia.org/wiki/Joint_Bi-level_Image_Experts_Group)的官网是 https://jpeg.org/jbig/ ，但是没有任何代码实现。
+
+Google搜索 [ISO-JBIG Library](https://www.google.com/search?q=ISO-JBIG%20Library) 第一条的JBIG-KIT是剑桥大学[Markus Kuhn](http://www.cl.cam.ac.uk/~mgk25/)对JBIG1的代码实现：https://www.cl.cam.ac.uk/~mgk25/jbigkit/ 。
+
+尝试编译生成的是`.o`和exe文件。
+
+### TIFF
+
+TIFF使用[simplesystems](http://www.simplesystems.org/libtiff/)托管的版本，当前最新版本4.3.0，从 https://download.osgeo.org/libtiff/ 获取源码压缩包。
+
+当上述代码准备完成后，使用CMake对tiff进行config，需要指定JPEG12的include和lib路径，按照JPEG-Prebuild中的添加到系统变量中的路径进行指定即可。
+
+勾选jpeg/jpeg12/old-jpeg/zlib等，会有如下输出：
+
+```plaintext
+ Support for external codecs:
+  ZLIB support:                       Requested:ON Availability:TRUE Support:TRUE
+  libdeflate support:                 Requested:ON Availability:TRUE Support:TRUE
+  Pixar log-format algorithm:         Requested:ON Availability:TRUE Support:TRUE
+  JPEG support:                       Requested:ON Availability:TRUE Support:TRUE
+  Old JPEG support:                   Requested:ON Availability:TRUE Support:TRUE
+  JPEG 8/12 bit dual mode:            Requested:ON Availability:TRUE Support:TRUE
+  ISO JBIG support:                   Requested:ON Availability:FALSE Support:FALSE
+  LERC support:                       Requested:OFF Availability:FALSE Support:FALSE
+  LZMA2 support:                      Requested:OFF Availability:FALSE Support:FALSE
+  ZSTD support:                       Requested:OFF Availability:FALSE Support:FALSE
+  WEBP support:                       Requested:OFF Availability:FALSE Support:FALSE
+
+  C++ support:                        ON (requested) TRUE (availability)
+```
+
+#### Prebuild
+
+需要修改`.pc`文件中prefix到对应路径，并将`libtiff-4.pc`所在路径添加到`PKG_CONFIG_PATH`变量中：
+
+tiff_4.3.0_x64.zip： http://ork.code.delbert.me/prebuild/tiff_4.3.0_x64.zip
+
+## Proland Prebuild
+
+Proland的各个项目之间相互依赖，因此使用Visual Studio在编译时会自动对依赖的proland lib进行编译。
+
+提供预编译的dll和lib下载地址如下：
+
+- Proland_x64.zip：http://ork.code.delbert.me/prebuild/Proland_x64.zip
+- proland_dlls_x64.zip： http://ork.code.delbert.me/prebuild/proland_dlls_x64.zip
