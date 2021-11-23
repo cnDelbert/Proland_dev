@@ -464,7 +464,9 @@ void HydroFlowTile::getLinkedEdges(vec2d &pos, DistCell *distCell, int riverId, 
 
 void HydroFlowTile::getFourPotentials(vec2d &pos, vec4f &res, int &type)
 {
-//#define PRINT_DEBUG
+#if _DEBUG
+#define PRINT_DEBUG
+#endif
     if (pos.x < ox || pos.x > ox + size || pos.y < oy || pos.y > oy + size) {
         type = FlowTile::ON_SKY;
         #ifdef PRINT_DEBUG

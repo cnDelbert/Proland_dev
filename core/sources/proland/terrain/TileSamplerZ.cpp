@@ -403,14 +403,14 @@ TileSamplerZ::State::State(ptr<GPUTileStorage> storage) :
     char define[128];
     sprintf(define, "NUM_INPUTS_%d", storage->getTextureCount());
     Module::addDefine(minmaxShader, define, minmaxShaderDefined);
-
-/*    { // DEBUG
+#if _DEBUG
+    { // DEBUG
         std::ofstream os;
         os.open("shader.source", ios::out);
         os << minmaxShaderDefined;
         os.close();
-    }*/
-    
+    }
+#endif   
     minmaxProg = new Program(new Module(330, minmaxShaderDefined.c_str()));
     viewportU = minmaxProg->getUniform4f("viewport");
     sizesU = minmaxProg->getUniform3f("sizes");
