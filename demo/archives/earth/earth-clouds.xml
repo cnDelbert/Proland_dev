@@ -26,11 +26,11 @@
 <archive>
     <multithreadScheduler name="defaultScheduler" nthreads="3" fps="0"/>
 
-    <!-- --------------- REDEFINITIONS --------------- -->
+    <!-- ************** REDEFINITIONS ************** -->
 
     <module name="clouds" version="330" source="clouds.glsl" options="CLOUDS_SHADOWS"/>
 
-    <!-- --------------- GROUND DEM --------------- -->
+    <!-- ************** GROUND DEM ************** -->
 
     <tileCache name="groundResiduals" scheduler="defaultScheduler">
         <cpuFloatTileStorage tileSize="197" channels="1" capacity="1024"/>
@@ -65,7 +65,7 @@
     <normalProducer name="groundNormals6" cache="groundNormals" elevations="groundElevations6" deform="sphere"/>
 
 
-    <!-- --------------- GROUND RGB --------------- -->
+    <!-- ************** GROUND RGB ************** -->
 
     <tileCache name="groundOrthoCpu" scheduler="defaultScheduler">
         <cpuByteTileStorage tileSize="196" channels="4" capacity="1024"/>
@@ -95,7 +95,7 @@
     <orthoGpuProducer name="groundOrthoGpu5" cache="groundOrthoGpu" ortho="groundOrthoCpu5"/>
     <orthoGpuProducer name="groundOrthoGpu6" cache="groundOrthoGpu" ortho="groundOrthoCpu6"/>
 
-    <!-- --------------- GROUND NODES --------------- -->
+    <!-- ************** GROUND NODES ************** -->
 
     <terrainNode name="earth1" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="16"/>
     <terrainNode name="earth2" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="16"/>
@@ -104,7 +104,7 @@
     <terrainNode name="earth5" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="16"/>
     <terrainNode name="earth6" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="16"/>
 
-    <!-- --------------- CLOUDS DEM --------------- -->
+    <!-- ************** CLOUDS DEM ************** -->
 
     <tileCache name="cloudResiduals" scheduler="defaultScheduler">
         <cpuFloatTileStorage tileSize="197" channels="1" capacity="512"/>
@@ -138,7 +138,7 @@
     <normalProducer name="cloudNormals5" cache="cloudNormals" elevations="cloudElevations5" deform="sphere"/>
     <normalProducer name="cloudNormals6" cache="cloudNormals" elevations="cloudElevations6" deform="sphere"/>
 
-    <!-- --------------- CLOUDS RGB --------------- -->
+    <!-- ************** CLOUDS RGB ************** -->
 
     <tileCache name="cloudOrthoCpu" scheduler="defaultScheduler">
         <cpuByteTileStorage tileSize="196" channels="1" capacity="512"/>
@@ -171,7 +171,7 @@
     <orthoGpuProducer name="cloudOrthoGpu5" cache="cloudOrthoGpu" ortho="cloudOrthoCpu5"/>
     <orthoGpuProducer name="cloudOrthoGpu6" cache="cloudOrthoGpu" ortho="cloudOrthoCpu6"/>
 
-    <!-- --------------- CLOUDS NODES --------------- -->
+    <!-- ************** CLOUDS NODES ************** -->
 
     <terrainNode name="cloud1" size="6365000" zmin="-5000" zmax="5000" deform="sphere" splitFactor="2" maxLevel="9"/>
     <terrainNode name="cloud2" size="6365000" zmin="-5000" zmax="5000" deform="sphere" splitFactor="2" maxLevel="9"/>
@@ -180,7 +180,7 @@
     <terrainNode name="cloud5" size="6365000" zmin="-5000" zmax="5000" deform="sphere" splitFactor="2" maxLevel="9"/>
     <terrainNode name="cloud6" size="6365000" zmin="-5000" zmax="5000" deform="sphere" splitFactor="2" maxLevel="9"/>
 
-    <!-- --------------- SCENE --------------- -->
+    <!-- ************** SCENE ************** -->
 
     <node name="scene">
         <node flags="camera">
@@ -377,7 +377,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 

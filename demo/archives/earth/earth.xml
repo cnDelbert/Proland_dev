@@ -210,7 +210,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 

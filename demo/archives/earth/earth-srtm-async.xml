@@ -26,7 +26,7 @@
 <archive>
     <multithreadScheduler name="defaultScheduler" nthreads="3" fps="0" prefetchRate="2" prefetchQueue="64"/>
 
-    <!-- --------------- GROUND DEM --------------- -->
+    <!-- ************** GROUND DEM ************** -->
 
     <tileCache name="groundResiduals" scheduler="defaultScheduler">
         <cpuFloatTileStorage tileSize="197" channels="1" capacity="1024"/>
@@ -66,7 +66,7 @@
     <normalProducer name="groundNormals5" cache="groundNormals" elevations="groundElevations5" deform="sphere"/>
     <normalProducer name="groundNormals6" cache="groundNormals" elevations="groundElevations6" deform="sphere"/>
 
-    <!-- --------------- GROUND RGB --------------- -->
+    <!-- ************** GROUND RGB ************** -->
 
     <tileCache name="groundOrthoCpu" scheduler="defaultScheduler">
         <cpuByteTileStorage tileSize="196" channels="4" capacity="1024"/>
@@ -117,7 +117,7 @@
     <orthoGpuProducer name="groundAmbientApertureGpu5" cache="groundAmbientApertureGpu" ortho="groundAmbientApertureCpu5"/>
     <orthoGpuProducer name="groundAmbientApertureGpu6" cache="groundAmbientApertureGpu" ortho="groundAmbientApertureCpu6"/>
 
-    <!-- --------------- GROUND NODES --------------- -->
+    <!-- ************** GROUND NODES ************** -->
 
     <terrainNode name="earth1" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="23"/>
     <terrainNode name="earth2" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="23"/>
@@ -126,7 +126,7 @@
     <terrainNode name="earth5" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="23"/>
     <terrainNode name="earth6" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="23"/>
 
-    <!-- --------------- SCENE --------------- -->
+    <!-- ************** SCENE ************** -->
 
     <node name="scene">
         <node flags="camera">
@@ -243,7 +243,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 

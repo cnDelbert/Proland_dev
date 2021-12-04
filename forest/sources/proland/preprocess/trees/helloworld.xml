@@ -89,7 +89,7 @@ const char *helloWorldSource = "\
         wraps=\"CLAMP_TO_BORDER\" wrapt=\"CLAMP_TO_BORDER\"\n\
         borderType=\"FLOAT\" borderr=\"1.0\" borderg=\"1.0\" borderb=\"1.0\" bordera=\"1.0\"/>\n\
 \n\
-    <!-- --------------- SCENE --------------- -->\n\
+    <!-- ************** SCENE ************** -->\n\
 \n\
     <terrainNode name=\"terrain\" size=\"50000\" zmin=\"0\" zmax=\"5000\" splitFactor=\"2\" maxLevel=\"7\"/>\n\
 \n\

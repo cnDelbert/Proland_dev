@@ -26,7 +26,7 @@
 <archive>
     <multithreadScheduler name="defaultScheduler" nthreads="3" fps="0"/>
 
-    <!-- --------------- REDEFINITIONS --------------- -->
+    <!-- ************** REDEFINITIONS ************** -->
 
     <module name="globalsShaderFS" version="330" vertex="globalsShader.glsl" fragment="globalsShader.glsl" options="NOHDR">
         <uniform1f name="hdrExposure" x="0.25"/>
@@ -226,7 +226,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 

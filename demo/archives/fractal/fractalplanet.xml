@@ -26,7 +26,7 @@
 <archive>
     <multithreadScheduler name="defaultScheduler" nthreads="3" fps="0"/>
 
-    <!-- --------------- GROUND DEM --------------- -->
+    <!-- ************** GROUND DEM ************** -->
 
     <tileCache name="groundElevations" scheduler="defaultScheduler">
         <gpuTileStorage tileSize="101" nTiles="1296"
@@ -56,7 +56,7 @@
     <normalProducer name="groundNormals5" cache="groundNormals" elevations="groundElevations5" deform="sphere"/>
     <normalProducer name="groundNormals6" cache="groundNormals" elevations="groundElevations6" deform="sphere"/>
 
-    <!-- --------------- GROUND NODES --------------- -->
+    <!-- ************** GROUND NODES ************** -->
 
     <terrainNode name="earth1" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="20"/>
     <terrainNode name="earth2" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="20"/>
@@ -65,7 +65,7 @@
     <terrainNode name="earth5" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="20"/>
     <terrainNode name="earth6" size="6360000" zmin="0" zmax="10000" deform="sphere" splitFactor="2" maxLevel="20"/>
 
-    <!-- --------------- SCENE --------------- -->
+    <!-- ************** SCENE ************** -->
 
     <node name="scene">
         <node flags="camera">
@@ -176,7 +176,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 

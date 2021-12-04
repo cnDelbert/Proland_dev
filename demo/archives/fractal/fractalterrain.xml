@@ -26,7 +26,7 @@
 <archive>
     <multithreadScheduler name="defaultScheduler" nthreads="3" fps="0"/>
 
-    <!-- --------------- GROUND DEM --------------- -->
+    <!-- ************** GROUND DEM ************** -->
 
     <tileCache name="groundElevations" scheduler="defaultScheduler">
         <gpuTileStorage tileSize="101" nTiles="512"
@@ -40,7 +40,7 @@
     </tileCache>
     <normalProducer name="groundNormals1" cache="groundNormals" elevations="groundElevations1"/>
 
-    <!-- --------------- GROUND ORTHO --------------- -->
+    <!-- ************** GROUND ORTHO ************** -->
 
     <tileCache name="groundOrthoGpu" scheduler="defaultScheduler">
         <gpuTileStorage tileSize="100" nTiles="512"
@@ -49,7 +49,7 @@
     </tileCache>
     <orthoProducer name="groundOrthoGpu1" cache="groundOrthoGpu" hsv="true" rnoise="50,128,0,0" cnoise="25,12.5,127.5" noise="0,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255"/>
 
-    <!-- --------------- GROUND LCC --------------- -->
+    <!-- ************** GROUND LCC ************** -->
 
     <tileCache name="groundLccGpu" scheduler="defaultScheduler">
         <gpuTileStorage tileSize="100" nTiles="512"
@@ -62,11 +62,11 @@
     </orthoProducer>
     <lccProducer name="groundLcc1" density="groundLccGpu1" plants="trees"/>
 
-    <!-- --------------- GROUND NODES --------------- -->
+    <!-- ************** GROUND NODES ************** -->
 
     <terrainNode name="terrain" size="50000" zmin="0" zmax="5000" splitFactor="2" maxLevel="16"/>
 
-    <!-- --------------- SCENE --------------- -->
+    <!-- ************** SCENE ************** -->
 
     <node name="scene">
         <node flags="camera">
@@ -115,7 +115,7 @@
         </node>
     </node>
 
-    <!-- --------------- USER INTERFACE --------------- -->
+    <!-- ************** USER INTERFACE ************** -->
 
     <basicViewHandler name="viewHandler" viewManager="window"/>
 
