@@ -44,7 +44,7 @@
 
 #include <string>
 
-typedef unsigned char byte;
+typedef unsigned char raw_byte; // C++17 defines std::byte - renamed byte to raw_byte to avoid that conflict
 typedef unsigned short word;
 typedef unsigned int dword;
 
@@ -59,9 +59,9 @@ bool fexists(const string &name);
 
 bool flog(const string &name);
 
-void CompressImageDXT1( const byte *inBuf, byte *outBuf, int width, int height, int &outputBytes );
+void CompressImageDXT1( const raw_byte *inBuf, raw_byte *outBuf, int width, int height, int &outputBytes );
 
-void CompressImageDXT5( const byte *inBuf, byte *outBuf, int width, int height, int &outputBytes );
+void CompressImageDXT5( const raw_byte *inBuf, raw_byte *outBuf, int width, int height, int &outputBytes );
 
 }
 
