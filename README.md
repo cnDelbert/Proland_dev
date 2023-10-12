@@ -144,3 +144,8 @@ Zlib1 and JPEG62 are recomended. Or, TIFF warning would show up.
 > TBD: TIFF编译建议指定使用 zlib 和 JPEG 库，否则在运行 demo 时会有相关 Warning 并引起渲染错误。
 
 
+Instructions on Linux - tested with Ubuntu 22.04:
+1. Build AntTweakBar: go to AntTweakBar/src -> type make
+2. Build ork: go to ork dir -> mkdir build -> cd build -> cmake -DCMAKE_INSTALL_PREFIX=<your-install-dir> ..
+3. export PKG_CONFIG_PATH=<your-install-dir>/lib/pkgconfig
+4. Build Proland: go to Proland dir -> mkdir build -> cd build -> cmake -DCMAKE_INSTALL_PREFIX=<your-install-dir> -DAntTweakBar_INCLUDE_DIRS=<path-where-you-extracted-AntTweakBar>/include -DAntTweakBar_LIBRARY_DIRS=<path-where-you-extracted-AntTweakBar>/lib ..
