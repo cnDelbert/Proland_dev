@@ -46,7 +46,13 @@ INSTALL(TARGETS ${LIBNAME} LIBRARY DESTINATION ${LIB_INSTALL_DIR} ARCHIVE DESTIN
 
 #SET(ORK_CFLAGS "-DORK_API= -DTIXML_USE_STL")
 #SET(PROLAND_CFLAGS "-DPROLAND_API=" "-DUSE_SHARED_PTR")
-add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllexport)" "-DUSE_SHARED_PTR")
+if(CMAKE_COMPILER_ID STREQUAL "MSVC")
+    add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllimport)" "-DUSE_SHARED_PTR")
+else()
+    add_definitions("-DTIXML_USE_STL" "-DUSE_SHARED_PTR" "-fPIC")
+    add_compile_definitions("ORK_API=")
+    add_compile_definitions("PROLAND_API=")
+endif()
 
 CONFIGURE_FILE(proland-river.pc.in ${PROJECT_BINARY_DIR}/proland-river.pc @ONLY)
 INSTALL(FILES ${PROJECT_BINARY_DIR}/proland-river.pc DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)

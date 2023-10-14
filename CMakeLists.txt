@@ -47,16 +47,21 @@ PKG_CHECK_MODULES(Glew glew REQUIRED)
 include_directories(${Glew_INCLUDE_DIRS})
 link_directories(${Glew_LIBRARY_DIRS})
 
-PKG_CHECK_MODULES(GLFW glfw3 REQUIRED)
+if(CMAKE_COMPILER_ID STREQUAL "MSVC")
+    PKG_CHECK_MODULES(GLFW glfw3 REQUIRED)
+    PKG_CHECK_MODULES(GLUT freeglut REQUIRED)
+    SET(pThreads_INCLUDE_DIRS pThreads_INCLUDE_DIR-NOTFOUND CACHE PATH "pThreads include dir.")
+    SET(pThreads_LIBRARY_DIRS pThreads_LIB-NOTFOUND CACHE PATH "pThreads lib dir.")
+else()
+    FIND_PACKAGE(glfw3 REQUIRED)
+endif()
+
 include_directories(${GLFW_INCLUDE_DIRS})
 link_directories(${GLFW_LIBRARY_DIRS})
 
-PKG_CHECK_MODULES(GLUT freeglut REQUIRED)
 include_directories(${GLUT_INCLUDE_DIRS})
 link_directories(${GLUT_LIBRARY_DIRS})
 
-SET(pThreads_INCLUDE_DIRS pThreads_INCLUDE_DIR-NOTFOUND CACHE PATH "pThreads include dir.")
-SET(pThreads_LIBRARY_DIRS pThreads_LIB-NOTFOUND CACHE PATH "pThreads lib dir.")
 
 SET(AntTweakBar_INCLUDE_DIRS AntTweakBar_INCLUDE_DIR-NOTFOUND CACHE PATH "AntTweakBar include dir.")
 SET(AntTweakBar_LIBRARY_DIRS AntTweakBar_LIB-NOTFOUND CACHE PATH "AntTweakBar lib dir.")

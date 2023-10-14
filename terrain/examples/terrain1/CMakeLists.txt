@@ -15,7 +15,13 @@ include_directories(${PROLAND_TERRAIN_SOURCES} ${PROLAND_CORE_SOURCES})
 # Sources
 file(GLOB SOURCE_FILES *.cpp)
 
-add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllimport)" "-DUSE_SHARED_PTR")
+if(CMAKE_COMPILER_ID STREQUAL "MSVC")
+    add_definitions("-DORK_API=__declspec(dllimport)" "-DTIXML_USE_STL" "-DPROLAND_API=__declspec(dllimport)" "-DUSE_SHARED_PTR")
+else()
+    add_definitions("-DTIXML_USE_STL" "-DUSE_SHARED_PTR" "-fPIC")
+    add_compile_definitions("ORK_API=")
+    add_compile_definitions("PROLAND_API=")
+endif()
 
 set(EXAMPLE_EXE_PATH "/examples/terrain/terrain1")
 set(EXECUTABLE_OUTPUT_PATH "${EXECUTABLE_OUTPUT_PATH}${EXAMPLE_EXE_PATH}")
@@ -26,7 +32,7 @@ add_executable(${EXENAME} ${SOURCE_FILES})
 IF(WIN32)
     target_link_libraries(${EXENAME} proland-core proland-terrain ork pthreadVC2 OpenGL32 GLU32 glew32 freeglut glfw3 tiff AntTweakBar64 stb_image tinyxml)
 ELSE(WIN32)
-    target_link_libraries(${EXENAME}  -Wl,--whole-archive proland-core proland-terrain ork -Wl,--no-whole-archive pthread GL GLU GLEW glut glfw3 rt dl Xrandr Xinerama Xxf86vm Xext Xcursor Xrender Xfixes tiff AntTweakBar stb_image tinyxml X11)
+    target_link_libraries(${EXENAME}  -Wl,--whole-archive proland-core proland-terrain ork -Wl,--no-whole-archive pthread GL GLU GLEW glut glfw rt dl Xrandr Xinerama Xxf86vm Xext Xcursor Xrender Xfixes tiff AntTweakBar stb_image tinyxml X11)
 ENDIF(WIN32)
 
 # Copy all files in source tree, except this CMakeLists.txt and source files
